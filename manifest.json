@@ -1,7 +1,7 @@
 {
-  "name": "Getting Started Example",
+  "name": "ContribsToday",
   "version": "1.0",
-  "description": "Build an Extension!",
+  "description": "Chrome Extension that displays how many contributions you made today on Github.",
   "permissions": ["activeTab", "declarativeContent", "storage"],
   "options_page": "options.html",
   "background": {
