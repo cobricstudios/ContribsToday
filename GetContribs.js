@@ -1,10 +1,9 @@
 const user = 'krissemicolon';
+const date = new Date();
+const daydate = date.getDate();
+const monthdate = date.getMonth();
+const yeardate = date.getFullYear();
 const day = yeardate+"-"+monthdate+"-"+daydate;
-var date = new Date();
-var daydate = date.getDate();
-var monthdate = date.getMonth();
-var yeardate = date.getFullYear();
-
 
 fetch('https://urlreq.appspot.com/req?method=GET&url=https%3A%2F%2Fgithub.com%2Fusers%2F' + user + '%2Fcontributions%3Fto%3D' + day)
     .then(function(response) {
