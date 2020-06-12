@@ -13,8 +13,13 @@ fetch('https://urlreq.appspot.com/req?method=GET&url=https%3A%2F%2Fgithub.com%2F
         xmlDoc = new DOMParser().parseFromString(text, 'text/xml');
         var nodes = xmlDoc.getElementsByTagName('rect');
         var dayContributions = nodes[nodes.length-1].getAttribute('data-count');
-        console.log(dayContributions)
+        console.log(dayContributions);
     })
     .catch(function(error) {
         console.log('Request failed', error)
+        
     });
+
+chrome.browserAction.setBadgeText("5");
+
+//chrome.browserAction.setBadgeText({text: "5"});
