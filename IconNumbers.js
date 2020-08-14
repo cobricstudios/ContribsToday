@@ -1,2 +1,1 @@
-
-chrome.browserAction.setBadgeText({text: "1"});
+chrome.browserAction.setBadgeText({text: "2"});
