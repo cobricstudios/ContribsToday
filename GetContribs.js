@@ -18,7 +18,3 @@ fetch('https://urlreq.appspot.com/req?method=GET&url=https%3A%2F%2Fgithub.com%2F
     .catch(function(error) {
         console.log('Request failed', error)
     });
-
-chrome.browserAction.setBadgeText("5");
-
-//chrome.browserAction.setBadgeText({text: "5"});

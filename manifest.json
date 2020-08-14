@@ -7,15 +7,7 @@
   "background": {
     "scripts": ["GetContribs.js"],
     "persistent": false
-  },
-  "page_action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "images/icon-2-16px.png",
-      "32": "images/icon-2-32px.png",
-      "48": "images/icon-2-48px.png",
-      "128": "images/icon-2-128px.png"
-    }
+
   },
   "icons": {
     "16": "images/icon-2-16px.png",
