@@ -4,10 +4,11 @@ const daydate = date.getDate();
 const monthdate = date.getMonth()+1;
 const yeardate = date.getFullYear();
 const day = yeardate+"-"+monthdate+"-"+daydate;
+url = 'https://urlreq.appspot.com/req?method=GET&url=https%3A%2F%2Fgithub.com%2Fusers%2F' + user + '%2Fcontributions%3Fto%3D' + day;
 let dayContributions
 
 function Fetch() {
-fetch('https://urlreq.appspot.com/req?method=GET&url=https%3A%2F%2Fgithub.com%2Fusers%2F' + user + '%2Fcontributions%3Fto%3D' + day)
+fetch(url)
     .then(function(response) {
         return response.text();
     })
@@ -15,7 +16,7 @@ fetch('https://urlreq.appspot.com/req?method=GET&url=https%3A%2F%2Fgithub.com%2F
         xmlDoc = new DOMParser().parseFromString(text, 'text/xml');
         const nodes = xmlDoc.getElementsByTagName('rect');
         dayContributions = nodes[nodes.length - 1].getAttribute('data-count');
-        console.log("User: "+user+" Date: "+day+" Contribs: "+dayContributions);
+        // console.log("User: "+user+" Date: "+day+" Contribs: "+dayContributions);
 
     })
     .catch(function(error) {
@@ -30,7 +31,7 @@ let i = 1
 function updateContribs() {
     setTimeout(function() {
         console.log("User: "+user+" Date: "+day+" Contribs: "+dayContributions);
-        i++;
+        //i++;
         if (i < 10) {
             Fetch();
             updateContribs();
@@ -38,6 +39,6 @@ function updateContribs() {
     }, 3000)
 }
 
-updateContribs();                           //  start the loop
+updateContribs();
 
-chrome.browserAction.setBadgeText({text: ""});
+chrome.browserAction.setBadgeText({text: dayContributions});
