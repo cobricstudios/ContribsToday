@@ -1,14 +1,14 @@
-const user = 'krissemicolon';
+let user = 'krissemicolon';
 const date = new Date();
 const daydate = date.getDate();
 const monthdate = date.getMonth()+1;
 const yeardate = date.getFullYear();
 const day = yeardate+"-"+monthdate+"-"+daydate;
-url = 'https://urlreq.appspot.com/req?method=GET&url=https%3A%2F%2Fgithub.com%2Fusers%2F' + user + '%2Fcontributions%3Fto%3D' + day;
+// url = 'https://urlreq.appspot.com/req?method=GET&url=https%3A%2F%2Fgithub.com%2Fusers%2F' + user + '%2Fcontributions%3Fto%3D' + day;
 let dayContributions
 
 function Fetch() {
-fetch(url)
+fetch('https://urlreq.appspot.com/req?method=GET&url=https%3A%2F%2Fgithub.com%2Fusers%2F'+user+'%2Fcontributions%3Fto%3D'+day)
     .then(function(response) {
         return response.text();
     })
@@ -20,7 +20,7 @@ fetch(url)
 
     })
     .catch(function(error) {
-        console.log('Request failed', error)
+        console.log('Request failed', error);
     });
 
 }
@@ -34,11 +34,10 @@ function updateContribs() {
         //i++;
         if (i < 10) {
             Fetch();
-            updateContribs();
+            chrome.browserAction.setBadgeText({text: dayContributions});
+
         }
     }, 3000)
 }
 
 updateContribs();
-
-chrome.browserAction.setBadgeText({text: dayContributions});
