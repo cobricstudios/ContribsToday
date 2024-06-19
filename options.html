@@ -1,21 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <style>
-      button {
-        height: 30px;
-        width: 30px;
-        outline: none;
-        margin: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <form>
-      <label for="username">Enter your GitHub Username: </label> <br />
-      <input id="username" type="text" /> <br />
-      <button type="submit">Submit</button>
-    </form>
-  </body>
-  <script src="options.js"></script>
+    <head>
+        <title>Settings</title>
+    </head>
+    <body>
+        <form
+            accept-charset="utf-8"
+            id="settingsForm"
+            style="width: 250px; margin: 0 auto; margin-top: 12pt"
+        >
+            <label>GitHub Username:</label>
+            <input type="text" id="username" />
+            <br />
+            <label>GitHub API Token:</label>
+            <input type="text" id="ghToken" placeholder="github_pat_..." />
+            <br />
+            <label>Show Badge:</label>
+            <input type="checkbox" id="badge" />
+            <br />
+            <button type="submit" style="margin-top: 8pt">Save Settings</button>
+        </form>
+        <script src="options.js"></script>
+    </body>
 </html>
