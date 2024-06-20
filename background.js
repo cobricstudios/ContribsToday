@@ -7,19 +7,32 @@ async function getConfig() {
   }
 }
 (async () => {
-  if (!(await getConfig())) {
-    const configDefault = { username: "", ghToken: "", badge: false };
-    config = configDefault;
+  const configExists = await getConfig();
+
+  if (!configExists) {
+    const configDefault = {
+      username: "",
+      ghToken: "",
+      badge: false,
+      badgeColor: "",
+    };
     browser.storage.local.set({
       config: configDefault,
     });
   }
+
+  const config = await getConfig();
+  browser.browserAction.setBadgeBackgroundColor({
+    color: config.badgeColor || "#000",
+  });
+  update();
 })();
 
 browser.browserAction.onClicked.addListener(async () => {
-  const username = (await getConfig()).usernmame;
+  const config = await getConfig();
+
   browser.tabs.create({
-    url: "https://github.com/" + username,
+    url: "https://github.com/" + config.username,
   });
 });
 
@@ -29,17 +42,18 @@ async function update() {
   let contributions = null;
   try {
     contributions = await fetchContributions();
-    // TODO: remove this before pushing
   } catch (e) {
     console.error(e);
     return;
   }
 
-  if (config.badge || true) {
+  if (config.badge) {
     browser.browserAction.setBadgeText({ text: contributions.toString() });
+  } else {
+    browser.browserAction.setBadgeText({ text: "" });
   }
 
-  let currentIcon128 = "";
+  let currentIcon128;
   if (contributions <= 0) {
     currentIcon128 = "icon-0-128px.png";
   } else if (contributions > 0 && contributions < 4) {
@@ -99,7 +113,6 @@ async function fetchContributions() {
   });
 
   const data = await response.json();
-  console.log("Data", data);
 
   const contributionWeek =
     data.data.user.contributionsCollection.contributionCalendar.weeks[
@@ -114,4 +127,4 @@ async function fetchContributions() {
   return contributionCount;
 }
 
-setInterval(update, 18000);
+setInterval(update, 30000);
